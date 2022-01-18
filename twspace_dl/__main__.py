@@ -6,8 +6,9 @@ import os
 import shutil
 import sys
 
-from twspace_dl.twspace_dl import TwspaceDL
-from twspace_dl.login import Login, load_from_file, write_to_file
+from format_info import FormatInfo
+from twspace_dl import TwspaceDL
+from login import Login, load_from_file, write_to_file
 
 
 def main() -> None:
@@ -106,7 +107,7 @@ def main() -> None:
         "-u", "--url", action="store_true", help="display the master url"
     )
     output_group.add_argument(
-        "--write-url", type=str, metavar="URL_OUTPUT", help="write master url to file"
+        "--write-url", action="store_true", help="write master url to file"
     )
     parser.set_defaults(func=twspace)
     if len(sys.argv) == 1:
@@ -174,12 +175,12 @@ def twspace(args: argparse.Namespace) -> None:
     if args.write_metadata:
         metadata = json.dumps(twspace_dl.metadata, indent=4)
         filename = twspace_dl.filename
-        with open(f"{filename}.json", "w", encoding="utf-8") as metadata_io:
+        with open(f"{twspace_dl.download_dir}/{filename}.json", "w", encoding="utf-8") as metadata_io:
             metadata_io.write(metadata)
     if args.url:
         print(twspace_dl.master_url)
     if args.write_url:
-        with open(args.write_url, "a", encoding="utf-8") as url_output:
+        with open(f"{twspace_dl.download_dir}/{filename}_masterurl.txt", "a", encoding="utf-8") as url_output:
             url_output.write(twspace_dl.master_url)
     if args.write_playlist:
         twspace_dl.write_playlist()

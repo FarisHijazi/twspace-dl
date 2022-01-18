@@ -3,6 +3,7 @@
 *.m4a
 *.json
 tmp
+downloads/
 __pycache__
 .python-version
 cookies.txt
