@@ -161,7 +161,9 @@ class TwspaceDL:
     def download_dir(self) -> str:
         format_info = FormatInfo()
         format_info.set_info(self.metadata)
-        return 'downloads/' + format_info['title'].replace('/', ' ')
+        download_dir = 'downloads/' + FormatInfo.sterilize_fn(format_info['title'].replace('/', ' ').replace('?', ' ').strip())
+        os.makedirs(download_dir, exist_ok=True)
+        return download_dir
 
     @cached_property
     def metadata(self) -> dict:

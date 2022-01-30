@@ -48,6 +48,14 @@ pip install .
 twspace_dl -i space_url
 ```
 
+For development, just switch `twspace_dl` with `python twspace_dl/__main__.py`
+
+Save more stuff (most downloads will look like the following:)
+
+```
+twspace_dl -i space_url -k -v -m -u -p --write-url
+```
+
 <details>
 <summary>With binaries</summary>
 
