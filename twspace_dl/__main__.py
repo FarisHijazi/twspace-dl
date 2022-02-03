@@ -183,7 +183,7 @@ def twspace(args: argparse.Namespace) -> None:
         with open(f"{twspace_dl.download_dir}/{filename}_masterurl.txt", "a", encoding="utf-8") as url_output:
             url_output.write(twspace_dl.master_url)
     if args.write_playlist:
-        twspace_dl.write_playlist()
+        twspace_dl.write_playlist(twspace_dl.download_dir)
 
     if not args.skip_download:
         try:
